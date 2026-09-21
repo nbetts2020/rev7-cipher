@@ -43,7 +43,7 @@ built, gets filled, and never gets printed. Everything in it is discarded.
 CrypTool never fixed this. The file was quietly deleted in 2020 as part of a
 legacy refactor, and no public bug
 report or fix was ever filed against it. The modern site has no AMSCO tool. But
-the bug itself was never corrected — byte-identical copies of that file were
+the bug itself was never corrected, as byte-identical copies of that file were
 still sitting in eleven public repositories as of September 2026.
 
 Thus:
