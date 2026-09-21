@@ -36,8 +36,3 @@ completion.
 
 The remaining **2,849,520** keys exceed signed 32-bit range and were not
 searched in this pass at all.
-
-Independent Python and C++ implementations agree on the enumeration, the
-per-shard key sums and the zero-position counts. Five planted keys exercising
-both shards were recovered correctly, and unchanged PHP execution confirmed all
-five outer encryptions.
