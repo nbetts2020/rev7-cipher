@@ -28,7 +28,7 @@ handed back 1,092 characters. It had silently deleted 168 of them and reported
 no error. That output is what went into the game.
 
 **That is also why every attempt stalled.** A shuffling cipher normally
-preserves length: 1,092 characters in, 1,092 out. So a reasonable assumption treated
+preserves length. 1,092 characters in = 1,092 out. So a reasonable assumption treated
 the 1,092 characters on the paper as the complete message and searched for the
 shuffle that unscrambles them. That search cannot succeed, as the real message was
 1,260 characters.
