@@ -1,10 +1,9 @@
 # Byte-exact evidence: never normalize line endings or re-encode.
-# The pinned CrypTool PHP files contain legacy latin-1 bytes in their comments
-# and are stored verbatim; do not add working-tree-encoding here.
+# class.amsco.php contains legacy latin-1 bytes in its comments and is stored
+# verbatim; do not add working-tree-encoding here.
 * -text
 cipher.txt                      -text
 solution/plaintext.txt          -text -diff
 solution/recovered_cipher.hex   -text
 solution/observed_cipher.txt    -text
-historical_source/*.php         -text -diff
-historical_source/*.template    -text
+historical_source/class.amsco.php -text -diff

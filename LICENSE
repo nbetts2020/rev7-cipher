@@ -25,11 +25,8 @@ SOFTWARE.
 NOT COVERED BY THE ABOVE:
 
 historical_source/class.amsco.php
-historical_source/default_tool.php
-historical_source/form.template
-historical_source/infobox.template
-    Verbatim copies from cryptool-org/cto at commit
-    887e095c586f7dbae805ae40a29e82ce0d565a6f, included as evidence under their
+    Verbatim copy from cryptool-org/cto at commit
+    887e095c586f7dbae805ae40a29e82ce0d565a6f, included as evidence under its
     original terms.
 
 solution/blowfish_constants.json

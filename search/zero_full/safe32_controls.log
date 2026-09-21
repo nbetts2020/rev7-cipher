@@ -1,8 +1,0 @@
-Algorithms 16 key=Zombies
-Extra algorithms 19 self-tests PASS key=Zombies
-CONTROL label=safe_shard_control0 exact_expected=1 identical_completion_stream=1 candidates=8 nodes=3143
-CONTROL label=safe_shard_control1 exact_expected=1 identical_completion_stream=1 candidates=45 nodes=16387
-CONTROL label=safe_shard_control2 exact_expected=1 identical_completion_stream=1 candidates=1 nodes=1799
-CONTROL label=safe_shard_control3 exact_expected=1 identical_completion_stream=1 candidates=200 nodes=19499
-CONTROL label=safe_shard_control4 exact_expected=1 identical_completion_stream=1 candidates=3 nodes=1765
-CONTROLS DONE cases=5 candidates=257 nodes=42593 compared_output_bytes=665055

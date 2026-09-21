@@ -1,8 +1,0 @@
-{
-  "records": 64,
-  "modern_reencryption_exact": 64,
-  "literal_outer_forward_exact": 64,
-  "selected_semantic_candidate_index": 18,
-  "selected_candidate_caveat": "The outer transform erases data; exact re-encryption alone does not make this plaintext mathematically unique. Candidate18 is the coherent reading among the recorded language-constrained completions.",
-  "observed_compact_sha256": "5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c"
-}

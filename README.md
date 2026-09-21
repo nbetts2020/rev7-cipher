@@ -6,9 +6,9 @@ paper** in the *Revelations* map, shipped September 2016 — was recovered on
 
 This repository contains the transcription, the recovered plaintext, a
 standard-library verifier that reproduces the entire encryption chain from
-scratch, the pinned 2016 third-party source whose bug made the cipher solvable,
-the constraint search that found the key, and the negative-result reports from
-everything that did not work.
+scratch, and the pinned 2016 third-party source whose bug made the cipher
+solvable. It is deliberately small: everything here is either needed to check
+the solve or is the evidence for a claim made below.
 
 ## The message
 
@@ -81,9 +81,8 @@ which is exactly the character count on the paper. That missing-data signature i
 what identified the key. The pinned source is
 [`historical_source/class.amsco.php`](historical_source/class.amsco.php)
 (SHA-256 `132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f`,
-from `cryptool-org/cto` at commit `887e095c586f7dbae805ae40a29e82ce0d565a6f`),
-and `historical_source/php_runtime/` executes that file **unmodified** under
-`@php-wasm/node-8-4` to reproduce the paper.
+from `cryptool-org/cto` at commit `887e095c586f7dbae805ae40a29e82ce0d565a6f`).
+Running that file **unmodified** under PHP 8.4 reproduces the paper exactly.
 
 ## Caveats — please read these before repeating any claim from here
 
@@ -111,9 +110,7 @@ removed from `cryptool-org/cto` in commit
 `3220945062fedebbe56db59e44b0d659732d9cf9` (October 27, 2020); AMSCO is absent
 from both the current and legacy CrypTool catalogs, and its routes return 404.
 Byte-identical copies survive in `fschell/cryptool-online` and its forks. No fix
-or pull request has been filed, and a drafted maintainer message
-(`audit/MAINTAINER_REPORT.md`) has **not** been sent. Full findings:
-[`audit/REPORT.md`](audit/REPORT.md).
+or pull request has been filed.
 
 ## Credits
 
@@ -131,17 +128,16 @@ The solve itself was carried out with OpenAI Codex (gpt-6-astra).
 ```
 cipher.txt            the transcription, 16 lines, groups of five
 solution/             plaintext, all 64 candidates, the portable verifier
-docs/                 full technical report, article draft, transcription note
-historical_source/    pinned 2016 AMSCO PHP + php-wasm runner that executes it
-search/               the constraint search that found the key, and its audits
-lib/                  shared scanner, projection code, and BUILD.md
-audit/                September 2026 deployment audit of the CrypTool source
-negative_results/     reports from every approach that did not work
+docs/                 full technical report, transcription note
+historical_source/    the pinned 2016 AMSCO PHP file with the bug
 ```
 
 Start with [`docs/SOLUTION.md`](docs/SOLUTION.md) for the full technical
-account, and [`lib/BUILD.md`](lib/BUILD.md) if you want to re-run the native
-search rather than just verify the result.
+account.
+
+Not included here: the constraint search that found the key, the September 2026
+audit of the CrypTool source's remaining deployments, and the reports from the
+many approaches that did not work.
 
 ## Hashes
 
@@ -159,8 +155,8 @@ Code and documentation in this repository: MIT, see [LICENSE](LICENSE).
 Two files are third-party and are **not** covered by that license. They are
 included verbatim as evidence:
 
-- `historical_source/class.amsco.php` and the adjacent CrypTool files, from
-  `cryptool-org/cto`, under their original terms.
+- `historical_source/class.amsco.php`, from `cryptool-org/cto`, under its
+  original terms.
 - `solution/blowfish_constants.json`, derived from libmcrypt 2.5.8's
   `blowfish-compat.c` (LGPL). See `solution/BLOWFISH_SOURCE_NOTICE.txt` and
   `solution/COPYING.LIB`.
