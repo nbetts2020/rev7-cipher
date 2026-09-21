@@ -22,7 +22,7 @@ This repo contains the transcription, the recovered plaintext, and everything ne
 
 **Biggest Finding: the cipher was almost unsolvable because...it was broken.** In 2016, Treyarch wrote the
 message, encrypted it, and got 1,260 characters. To shuffle those, they likely ran them
-through an **AMSCO** transposition tool built on code from **CrypTool-Online** —
+through an **AMSCO** transposition tool built on code from **CrypTool-Online**,
 the free browser edition of CrypTool, which back then lived at `cryptool-online.org`. The tool
 handed back 1,092 characters. It had silently deleted 168 of them and reported
 no error. That output is what went into the game.
