@@ -52,7 +52,7 @@ Thus:
 1,260 - 1,092 = 168 = 2 × 84
 ```
 
-168 characters gone, two from each of 84 rows — the exact shape of one dropped
+168 characters gone, two from each of 84 rows, which is the exact shape of one dropped
 column. The size of the hole tells you the key contains a `0` and roughly where
 it sits. That changed what to search for. Sweeping the keys that could leave a gap this
 size turned up `1947038265`. Running the unmodified 2016 file
