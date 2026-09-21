@@ -12,7 +12,7 @@ paper's 1,092 hexadecimal characters and all 219 printed groups.
 > mound. I must go to the mound. Remember that! Why can’t I ever remember that.’
 > Not only is Dempsey a traitor, but he has lost his mind. I better be careful.
 
-## The chain
+## Solve
 
 | # | Layer, in encryption order | Exact settings |
 |---|---|---|
