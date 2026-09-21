@@ -1,0 +1,17 @@
+{
+  "candidates": 64,
+  "matches_original_broad_search": true,
+  "plaintext_crib_supplied_to_search": false,
+  "selected_candidate_index_zero_based": 18,
+  "selection_basis": "Post-search reading: candidate18 has coherent prose in all four erasure-affected regions.",
+  "mathematically_unique": false,
+  "key": "1947038265",
+  "algorithm": "blowfish-compat",
+  "mode": "CFB8",
+  "inner_key": "Zombies",
+  "IV_hex": "3030303030303030",
+  "outer_operation": "Historical AMSCO encode followed by full hex-character reversal",
+  "original_hex_characters": 1260,
+  "observed_hex_characters": 1092,
+  "omitted_hex_characters": 168
+}

@@ -6,9 +6,10 @@ paper** in the *Revelations* map, shipped September 2016 — was recovered on
 
 This repository contains the transcription, the recovered plaintext, a
 standard-library verifier that reproduces the entire encryption chain from
-scratch, and the pinned 2016 third-party source whose bug made the cipher
-solvable. It is deliberately small: everything here is either needed to check
-the solve or is the evidence for a claim made below.
+scratch, the pinned 2016 third-party source whose bug made the cipher solvable,
+and the constraint search that found the key. It is deliberately small:
+everything here is either needed to check the solve, needed to reproduce it, or
+is the evidence for a claim made below.
 
 ## The message
 
@@ -95,10 +96,14 @@ choice of candidate** — every one of the 64 reproduces the paper by constructi
 All 64 are in `solution/all_64_candidates.txt.gz`, with the differing regions
 mapped in `solution/ambiguity.json`.
 
-**The key space was not exhausted.** The search covered **416,400 keys** — the
-signed-32-bit-safe subset — out of **3,265,920** total non-leading-zero
-permutations. No claim of uniqueness beyond the searched subset is made or
-supported.
+**The key space was not exhausted.** The sweep targeted the **416,400-key**
+signed-32-bit-safe subset of the **3,265,920** total non-leading-zero
+permutations — and did not finish even that. One worker completed its 208,200
+keys and produced the 64 candidates; the other was stopped at a 170,000-key
+checkpoint once the answer was in hand. So **378,200 keys are guaranteed
+swept**, at least 38,200 of the safe subset were never reached, and the
+remaining 2,849,520 keys were not searched at all. No claim of uniqueness is
+made or supported. Full accounting: [`search/README.md`](search/README.md).
 
 **One transcription character is contested.** The reconstruction supports the
 image-based line-6 reading `CF85C 2D87A ABE63` over a published guide's
@@ -130,14 +135,17 @@ cipher.txt            the transcription, 16 lines, groups of five
 solution/             plaintext, all 64 candidates, the portable verifier
 docs/                 full technical report, transcription note
 historical_source/    the pinned 2016 AMSCO PHP file with the bug
+search/               the constraint search that found the key
+lib/                  the scanner it compiles against, and build notes
 ```
 
 Start with [`docs/SOLUTION.md`](docs/SOLUTION.md) for the full technical
-account.
+account, or [`search/README.md`](search/README.md) for how the key was actually
+found. Verifying the solve needs nothing but Python; reproducing the *search*
+needs a libmcrypt build, covered in [`lib/BUILD.md`](lib/BUILD.md).
 
-Not included here: the constraint search that found the key, the September 2026
-audit of the CrypTool source's remaining deployments, and the reports from the
-many approaches that did not work.
+Not included here: the September 2026 audit of the CrypTool source's remaining
+deployments, and the reports from the many approaches that did not work.
 
 ## Hashes
 

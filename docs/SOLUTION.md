@@ -33,7 +33,13 @@ python3 -I solution/verify_portable.py
 
 It uses Python's standard library and the small files in `solution/`; it requires no native crypto library or network. It verifies the recovered ciphertext and plaintext, both encryption layers, the omitted column, original compact ciphertext, and grouping.
 
-The missing-nibble search itself is not included in this repository. It ran a native CFB8 constraint solver, linked against a locally built libmcrypt 2.5.8, against the observed paper and the masked AMSCO layout, with no plaintext crib supplied. It returned exactly 64 completions, all of them `blowfish-compat` with the IV fill above. The post-search selection of candidate 18 is a reading judgment, recorded explicitly as such.
+To repeat the missing-nibble search itself:
+
+```sh
+python3 -B search/zero_full/targeted_reproduce.py
+```
+
+This runs a native CFB8 constraint solver, linked against a locally built libmcrypt 2.5.8, against the observed paper and the masked AMSCO layout, with no plaintext crib supplied. It returns exactly 64 completions, all of them `blowfish-compat` with the IV fill above. The post-search selection of candidate 18 is a reading judgment, recorded explicitly as such. Build instructions are in `lib/BUILD.md`, and `search/README.md` explains the method and states exactly how much of the key space was covered.
 
 Exact selected plaintext SHA-256:
 
