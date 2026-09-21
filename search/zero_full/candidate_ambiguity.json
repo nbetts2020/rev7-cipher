@@ -1,0 +1,59 @@
+{
+  "candidate_count": 64,
+  "plaintext_bytes": 630,
+  "invariant_bytes": 596,
+  "variable_bytes": 34,
+  "selected_index": 18,
+  "regions": [
+    {
+      "start_byte_zero_based": 48,
+      "end_byte_exclusive": 57,
+      "length": 9,
+      "chosen": "psey is s",
+      "alternatives": [
+        "<>1W$9@6i",
+        "psey is s"
+      ],
+      "context": "Report 1918: Corporal Dempsey is still at large in France. "
+    },
+    {
+      "start_byte_zero_based": 220,
+      "end_byte_exclusive": 230,
+      "length": 10,
+      "chosen": "cover was ",
+      "alternatives": [
+        "a*rqL:x2i'",
+        "cover was "
+      ],
+      "context": "ad him in Calais, but my cover was blown and he evaded captu"
+    },
+    {
+      "start_byte_zero_based": 400,
+      "end_byte_exclusive": 410,
+      "length": 10,
+      "chosen": "s: \u2018I am",
+      "alternatives": [
+        "qF*`-YXp#x",
+        "s: \u2018I am"
+      ],
+      "context": "handwritten note. It reads: \u2018I am not a monster. He is the"
+    },
+    {
+      "start_byte_zero_based": 625,
+      "end_byte_exclusive": 630,
+      "length": 5,
+      "chosen": ".\n\n\n\n",
+      "alternatives": [
+        " gN0y",
+        "\"EZX\\",
+        "&q3_r",
+        "*'Efs",
+        ",@Cp{",
+        ".\n\n\n\n",
+        ".Zp(^",
+        "/<sG2"
+      ],
+      "context": "mind. I better be careful.\n\n\n\n"
+    }
+  ]
+}

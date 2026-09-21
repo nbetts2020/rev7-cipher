@@ -1,0 +1,11 @@
+{
+  "cases": 64,
+  "original_PHP_exact_observed_ciphertext_matches": 64,
+  "php_version": "8.4.25",
+  "source_sha256": "132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f",
+  "original_hex_characters": 1260,
+  "observed_hex_characters": 1092,
+  "omitted_hex_characters": 168,
+  "key": "1947038265",
+  "operation": "Original PHP AMSCO encode, remove grouping spaces, reverse all hex characters"
+}

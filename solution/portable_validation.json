@@ -1,0 +1,34 @@
+{
+  "random_block_encryptions_and_decryptions": 448,
+  "random_blocks_per_key": 64,
+  "tested_key_hex": [
+    "5a6f6d62696573",
+    "5a4f4d42494553",
+    "7a6f6d62696573",
+    "4b",
+    "41424344",
+    "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
+  ],
+  "independent_random_CFB8_cases": 42,
+  "CFB8_lengths": [
+    1,
+    7,
+    8,
+    9,
+    64,
+    630
+  ],
+  "original_known_answer_test": "passed",
+  "selected_630byte_modern_cipher_exact": true,
+  "observed_1092hex_forward_chain_exact": true,
+  "plaintext_sha256": "35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280",
+  "verifier_sha256": "c727038eab1ffc4b5f712f461243e04c142422e70b66e5e8cd6dd3d7bcf56b99",
+  "constants_sha256": "f1749fcedddcd51241a79a71095398274b38ddd03c66377aaff229453fb179e4",
+  "additional_root_verification": {
+    "complete_grouping_tokens": 219,
+    "first_token": "83",
+    "portable_script_final_sha256": "65b1d71075585bedd73289f1565f4d929323f12d6db8741907658b7519945845",
+    "note": "Root added and passed an exact grouped-token comparison. Independently tested crypto functions are unchanged."
+  }
+}

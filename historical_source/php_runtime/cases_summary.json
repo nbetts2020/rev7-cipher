@@ -1,0 +1,11 @@
+{
+  "cases": 1180,
+  "cases_sha256": "b23a1779d301c0bc3001475db7ddbe67128967e122f5a001f47dc49b17bcdb54",
+  "categories": {
+    "other-invalid": 24,
+    "preprocessing": 2,
+    "valid-fixture": 2,
+    "valid-permutation": 192,
+    "zero-permutation": 960
+  }
+}

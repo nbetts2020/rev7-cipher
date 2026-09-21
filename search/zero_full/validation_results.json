@@ -1,0 +1,10 @@
+{
+  "projection_comparisons": 2712,
+  "planted_controls": 152,
+  "control_language": 1,
+  "original_and_optimized_completion_streams_identical": true,
+  "original_source_PHP_forward_controls": 152,
+  "source_php_forward_evidence": "../continuation_zero_column/php_planted_results.json",
+  "projection_algorithms": "closed-form C++ scatter vs independently PHP-validated Python index projection",
+  "original_recovery_support_sha256": "1794e68a72791acb807bd989b4a5178880a8f942e35c077e65aaf7db85cac84b"
+}

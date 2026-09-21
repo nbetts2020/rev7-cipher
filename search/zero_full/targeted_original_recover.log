@@ -1,0 +1,3 @@
+Algorithms 16 key=Zombies
+Extra algorithms 19 self-tests PASS key=Zombies
+DONE mode=scan cases=76 nodes=52465 candidates=64 rejected_known=72 capped=0 long_erasure=0 seconds=0.0130106

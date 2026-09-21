@@ -1,0 +1,11 @@
+Blowfish algorithm: Bruce Schneier.
+
+Constants, key expansion and compatibility behavior were ported from
+libmcrypt 2.5.8, modules/algorithms/blowfish-compat.c.
+Original source SHA-256: 3584374a6bae4df8899e82d36255bbac0472904aed2095e3c08c57a5dd5b4cad
+
+The source notes that Nikos Mavroyanopoulos modified it for the libmcrypt
+API and placed those modifications under the license of libmcrypt.
+The included COPYING.LIB preserves the distribution's GNU Lesser General
+Public License, version 2.1. The Python implementation is a source port
+prepared for verification, not the original C file.

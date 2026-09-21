@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 nbetts2020
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+NOT COVERED BY THE ABOVE:
+
+historical_source/class.amsco.php
+historical_source/default_tool.php
+historical_source/form.template
+historical_source/infobox.template
+    Verbatim copies from cryptool-org/cto at commit
+    887e095c586f7dbae805ae40a29e82ce0d565a6f, included as evidence under their
+    original terms.
+
+solution/blowfish_constants.json
+    Derived from libmcrypt 2.5.8 blowfish-compat.c (LGPL). See
+    solution/BLOWFISH_SOURCE_NOTICE.txt and solution/COPYING.LIB.

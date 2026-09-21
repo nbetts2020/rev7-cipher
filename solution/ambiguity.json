@@ -1,0 +1,71 @@
+{
+  "candidate_count": 64,
+  "selected_index_zero_based": 18,
+  "selected_record_one_based": 19,
+  "bytes": 630,
+  "observed_hex_length": 1092,
+  "algorithm": "blowfish-compat",
+  "mode": "cfb8",
+  "key_ascii": "Zombies",
+  "iv_ascii": "00000000",
+  "amsco_key": "1947038265",
+  "outer": "reverse all hex characters after AMSCO encode",
+  "inner": "identity",
+  "cryptographic_unique": false,
+  "exact_existing_candidate_no_corrections": true,
+  "selected_sha256": "35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280",
+  "cipher_sha256": "2f7ff5dfff2d7de31556da56f941bb7f6f7d1299fb3b8540df85791c727ce13a",
+  "input_sha256": "5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c",
+  "independent_libmcrypt_reencryption_exact": true,
+  "historical_literal_forward_exact": true,
+  "cartesian_ambiguity_factorization": [
+    2,
+    2,
+    2,
+    8
+  ],
+  "spans": [
+    {
+      "start_zero_based": 48,
+      "end_exclusive": 57,
+      "variants_utf8": [
+        "<>1W$9@6i",
+        "psey is s"
+      ],
+      "selected_utf8": "psey is s"
+    },
+    {
+      "start_zero_based": 220,
+      "end_exclusive": 230,
+      "variants_utf8": [
+        "a*rqL:x2i'",
+        "cover was "
+      ],
+      "selected_utf8": "cover was "
+    },
+    {
+      "start_zero_based": 400,
+      "end_exclusive": 410,
+      "variants_utf8": [
+        "qF*`-YXp#x",
+        "s: \u2018I am"
+      ],
+      "selected_utf8": "s: \u2018I am"
+    },
+    {
+      "start_zero_based": 625,
+      "end_exclusive": 630,
+      "variants_utf8": [
+        " gN0y",
+        "\"EZX\\",
+        "&q3_r",
+        "*'Efs",
+        ",@Cp{",
+        ".\n\n\n\n",
+        ".Zp(^",
+        "/<sG2"
+      ],
+      "selected_utf8": ".\n\n\n\n"
+    }
+  ]
+}

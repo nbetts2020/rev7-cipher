@@ -1,0 +1,73 @@
+{
+  "keys": 45,
+  "portable_signed32_keys": 36,
+  "explicit_signed64_keys": 9,
+  "patterns": 2160,
+  "searches": {
+    "encode": {
+      "mode": "scan",
+      "cases": "54720",
+      "nodes": "609352",
+      "candidates": "0",
+      "rejected_known": "43378",
+      "capped": "0",
+      "long_erasure": "0",
+      "seconds": "0.446746"
+    },
+    "decode_cfb": {
+      "mode": "scan",
+      "cases": "109440",
+      "nodes": "0",
+      "candidates": "0",
+      "rejected_known": "109440",
+      "capped": "0",
+      "long_erasure": "0",
+      "seconds": "11.1268"
+    },
+    "decode_modes": {
+      "inputs": "1440",
+      "configurations": "331200",
+      "candidates": "0",
+      "safe_regions": "0",
+      "maximum_safe_run": "18",
+      "cached_streams": "97",
+      "seconds": "9.77793"
+    }
+  },
+  "erasure_controls": {
+    "controls": 152,
+    "candidates_preserved": 66113,
+    "exact_planted_cipher_and_plaintext_recoveries": 152,
+    "forward_legacy_and_modern_checks": "all candidates",
+    "original_PHP_runtime_executed": false
+  },
+  "masked_controls": {
+    "complete_chains": 230,
+    "exact_known_plaintext_regions": 230,
+    "negative_filler_artifact_controls": 1,
+    "original_PHP_verified_separately": true
+  },
+  "original_PHP_planted_encode": {
+    "cases": 152,
+    "exact_matches": 152,
+    "php_version": "8.4.25",
+    "php_int_size": 8,
+    "source_sha256": "132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f",
+    "original_source_executed": true
+  },
+  "original_PHP_planted_decode": {
+    "cases": 230,
+    "exact_matches": 230,
+    "php_version": "8.4.25",
+    "php_int_size": 8,
+    "source_sha256": "132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f",
+    "original_source_executed": true
+  },
+  "hashes": {
+    "recover.cpp": "c3fd5d13fbdc2777d97e69a0e3170ee589ca38b0cee55c81f3452bda588e74e9",
+    "work.py": "daceabf4ce43b868bd25b648bce0a707df966a15f5b14ab3e1c04ba2d103f2ce",
+    "masked_modes.cpp": "57a694a71f0fdf598a056eab388d24b3736ddd56c83e2f7328d260bae29ce61f",
+    "input_manifest.json": "8cd04f66fe29694a6149d2e46bbfb63525450903bc27686ca1660bcadc707e6a",
+    "controls_candidates.jsonl.gz": "959206dc0e26a5be8df9bc2de43ab6c5b7f66704fb88d80c078a6da6695729ed"
+  }
+}

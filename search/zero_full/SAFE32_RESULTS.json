@@ -1,0 +1,117 @@
+{
+  "rev7_coherent_solution_recovered": true,
+  "full_safe32_search_complete": false,
+  "stop_reason": "Parent directed interruption after exact candidate verification; no need to exhaust remainingkeys",
+  "worker0": {
+    "status": "interrupted",
+    "exit_code": 130,
+    "last_completed_checkpoint": {
+      "partition": 0,
+      "keys": 170000,
+      "ordinal": 339998,
+      "cases": 103360000,
+      "nodes": 1633944407,
+      "candidates": 0,
+      "capped": 0,
+      "long_erasure": 0,
+      "seconds": 682.252
+    },
+    "unlogged_later_work": "not counted",
+    "candidate_stream": "empty0-byte interrupted gzip file; no candidate records reported"
+  },
+  "worker1": {
+    "status": "complete",
+    "partition": 1,
+    "partitions": 2,
+    "keys": 208200,
+    "cases": 126585600,
+    "rejected_known": 100582563,
+    "nodes": 806976833,
+    "candidates": 64,
+    "capped": 0,
+    "long_erasure": 0,
+    "numeric_key_sum": 335561229045396,
+    "ordinal_sum": 43347240000,
+    "seconds": 533.639
+  },
+  "guaranteed_completed_keys": 378200,
+  "guaranteed_completed_cases": 229945600,
+  "safe32_keys_not_covered_by_completed_checkpoints": 38200,
+  "candidate_records_preserved": 64,
+  "candidate_case": {
+    "outer_amsco_key": "1947038265",
+    "outer_reverse": true,
+    "inner_orientation": "normal",
+    "algorithm": "blowfish-compat",
+    "mode": "CFB8",
+    "inner_key": "Zombies",
+    "iv_hex": "3030303030303030",
+    "original_hex_length": 1260,
+    "observed_hex_length": 1092,
+    "dropped_hex_characters": 168
+  },
+  "selected_semantic_candidate_index": 18,
+  "original_PHP_exact_matches": 64,
+  "modern_reencryption_exact_matches": 64,
+  "ambiguity": {
+    "candidate_count": 64,
+    "plaintext_bytes": 630,
+    "invariant_bytes": 596,
+    "variable_bytes": 34,
+    "selected_index": 18,
+    "regions": [
+      {
+        "start_byte_zero_based": 48,
+        "end_byte_exclusive": 57,
+        "length": 9,
+        "chosen": "psey is s",
+        "alternatives": [
+          "<>1W$9@6i",
+          "psey is s"
+        ],
+        "context": "Report 1918: Corporal Dempsey is still at large in France. "
+      },
+      {
+        "start_byte_zero_based": 220,
+        "end_byte_exclusive": 230,
+        "length": 10,
+        "chosen": "cover was ",
+        "alternatives": [
+          "a*rqL:x2i'",
+          "cover was "
+        ],
+        "context": "ad him in Calais, but my cover was blown and he evaded captu"
+      },
+      {
+        "start_byte_zero_based": 400,
+        "end_byte_exclusive": 410,
+        "length": 10,
+        "chosen": "s: \u2018I am",
+        "alternatives": [
+          "qF*`-YXp#x",
+          "s: \u2018I am"
+        ],
+        "context": "handwritten note. It reads: \u2018I am not a monster. He is the"
+      },
+      {
+        "start_byte_zero_based": 625,
+        "end_byte_exclusive": 630,
+        "length": 5,
+        "chosen": ".\n\n\n\n",
+        "alternatives": [
+          " gN0y",
+          "\"EZX\\",
+          "&q3_r",
+          "*'Efs",
+          ",@Cp{",
+          ".\n\n\n\n",
+          ".Zp(^",
+          "/<sG2"
+        ],
+        "context": "mind. I better be careful.\n\n\n\n"
+      }
+    ]
+  },
+  "unsearched_nonleading_zero_keys_above_signed32_limit": 2849520,
+  "source_sha256": "29b604ff326701c7eb828ecea0aa854a0687d3696c8e42aa1628beacf9615dd9"
+}

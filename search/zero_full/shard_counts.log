@@ -1,0 +1,26 @@
+PLANTED_MEMBERSHIP key=1023456789 ordinal=0 partition=0
+PLANTED_MEMBERSHIP key=1203456789 ordinal=40320 partition=0
+PLANTED_MEMBERSHIP key=1234567890 ordinal=46233 partition=1
+PLANTED_MEMBERSHIP key=1234567908 ordinal=46234 partition=0
+PLANTED_MEMBERSHIP key=1357924680 ordinal=99273 partition=1
+SHARD partition=0 partitions=2 keys=208200 numeric_key_sum=335561222458260 ordinal_sum=43347031800
+SHARD_ZERO partition=0 zero=1 keys=40320
+SHARD_ZERO partition=0 zero=2 keys=22680
+SHARD_ZERO partition=0 zero=3 keys=20880
+SHARD_ZERO partition=0 zero=4 keys=20760
+SHARD_ZERO partition=0 zero=5 keys=20712
+SHARD_ZERO partition=0 zero=6 keys=20712
+SHARD_ZERO partition=0 zero=7 keys=20712
+SHARD_ZERO partition=0 zero=8 keys=41424
+SHARD_ZERO partition=0 zero=9 keys=0
+SHARD partition=1 partitions=2 keys=208200 numeric_key_sum=335561229045396 ordinal_sum=43347240000
+SHARD_ZERO partition=1 zero=1 keys=40320
+SHARD_ZERO partition=1 zero=2 keys=22680
+SHARD_ZERO partition=1 zero=3 keys=20880
+SHARD_ZERO partition=1 zero=4 keys=20760
+SHARD_ZERO partition=1 zero=5 keys=20712
+SHARD_ZERO partition=1 zero=6 keys=20712
+SHARD_ZERO partition=1 zero=7 keys=20712
+SHARD_ZERO partition=1 zero=8 keys=0
+SHARD_ZERO partition=1 zero=9 keys=41424
+SHARDS_TOTAL keys=416400
