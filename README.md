@@ -66,9 +66,7 @@ of the 630 bytes to a single possible value. Four small spots admit more than
 one reading; one version is coherent English and the rest are gibberish, so the
 message itself is not in doubt, but this is more so a reconstruction, rather than a decryption.
 
-A more technical explanation — the exact cipher settings, the 64-candidate
-ambiguity, and a one-command verifier that checks the whole chain against the
-paper — lives in [`docs/SOLUTION.md`](docs/SOLUTION.md).
+A more technical explanation lives in [`docs/SOLUTION.md`](docs/SOLUTION.md).
 
 ## Credits
 
