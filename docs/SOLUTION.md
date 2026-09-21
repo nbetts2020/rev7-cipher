@@ -1,6 +1,4 @@
-# Revelations Rev-7 / Origins Trench — recovered September 7, 2026
-
-_All paths in this document are relative to the repository root._
+# Rev-7
 
 **The message is recovered.** The coherent completion reproduces every one of the paper's 1,092 hexadecimal characters and all 219 printed groups. The original ciphertext transcription was not changed.
 
