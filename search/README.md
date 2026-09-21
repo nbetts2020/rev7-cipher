@@ -1,13 +1,12 @@
 # How the key was found
 
-Verifying the solve needs none of this, as this directory
-answers the other question: *how was key `1947038265` discovered, and how were
+This directory answers the question: *how was key `1947038265` discovered, and how were
 168 destroyed characters regenerated?*
 
 ## Idea
 
 Reversing the paper and inverting the surviving AMSCO columns gives back a
-1,26--character layout in which 1,092 characters are known and **168 are
+1,26-character layout in which 1,092 characters are known and **168 are
 unknown** - the ones the buggy column-0 loop threw away. Those unknowns are fortunately not
 scattered randomly. For a given key they sit at fixed, computable offsets, two
 per 15-character row.
