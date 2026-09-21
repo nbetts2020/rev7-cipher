@@ -34,7 +34,7 @@ shuffle that unscrambles them. That search cannot succeed, as the real message w
 1,260 characters.
 
 **Breakthrough.** Rather than continuing to hack away at the cipher itself, I
-fetched CrypTool-Online's source — the file `class.amsco.php`, pinned to the
+fetched CrypTool-Online's source, the file `class.amsco.php`, pinned to the
 version that was live when the game shipped, and read it. The bug is
 unmistakable - the tool labels its columns with the digits of your key, then
 prints out columns `1` through `N`. If your key contains a `0`, that column gets
