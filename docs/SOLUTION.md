@@ -1,8 +1,7 @@
 # Rev-7
 
 **The message is recovered.** The reconstruction reproduces every one of the
-paper's 1,092 hexadecimal characters and all 219 printed groups. I did not
-change the original transcription.
+paper's 1,092 hexadecimal characters and all 219 printed groups.
 
 > MI-8 transcript. Field Report 1918: Corporal Dempsey is still at large in
 > France. My orders are to bring him back to US intelligence to face charges and
@@ -13,10 +12,6 @@ change the original transcription.
 > mound. I must go to the mound. Remember that! Why can’t I ever remember that.’
 > Not only is Dempsey a traitor, but he has lost his mind. I better be careful.
 
-That file is exactly **630 UTF-8 bytes**, including the curly quotes and
-apostrophes and **four line feeds after the final period**. The bytes are in
-`solution/plaintext.txt`. Don't let an editor normalize them.
-
 ## The chain
 
 | # | Layer, in encryption order | Exact settings |
@@ -26,7 +21,7 @@ apostrophes and **four line feeds after the final period**. The bytes are in
 | 3 | Historical AMSCO | Numeric key `1947038265`. Continuous two-character / one-character cells, starting with two. Reproduce the omission of the column labeled `0` |
 | 4 | Presentation | Group in fives, then reverse the whole grouped string. The paper adds its own line wrapping |
 
-## The bug
+## Bug
 
 **The zero in the key sits in the fifth column.** That column holds two
 hexadecimal characters per 15-character row. Across 84 rows it drops 168:
@@ -44,8 +39,15 @@ Its output loop reads labels 1 through the key length, so it never emits label
 PHP wrapper casts it. Running that unchanged class under PHP 8.4.25 reproduces
 the paper exactly.
 
-That proves the construction matches. It does not prove which copy of the
-software the author actually used.
+That proves the construction matches, but does not prove which copy of the
+software Treyarch actually used. I think the live site is the *likely*
+answer, for a few reasons. The bug belongs to this specific code rather than to
+AMSCO in general, so whatever they used descended from this file. The inner
+layer of the cipher is libmcrypt `blowfish-compat`, which in 2016 was
+overwhelmingly something you reached through PHP, and this tool is PHP. AMSCO is
+obscure enough that CrypTool-Online is where the community had already been
+looking for it. And standing up your own copy of the PHP is real effort when the
+site is one search away.
 
 ## How the missing characters came back
 
@@ -65,13 +67,12 @@ admitting 2 × 2 × 2 × 8 alternatives between them.
 
 Candidate 18, counting from zero, is the coherent reading in all four:
 `psey is s`, `cover was `, `s: ‘I am`, and a final period followed by four
-newlines. The others give nonsense. The message quoted above is that candidate
-with **nothing corrected and no words inserted**.
+newlines. The others give nonsense.
 
 Every alternative is kept in `solution/all_64_candidates.txt.gz`, and
 `solution/ambiguity.json` maps the regions that differ.
 
-## Check it yourself
+## Check
 
 ```sh
 python3 -I solution/verify_portable.py
@@ -86,26 +87,3 @@ reconstructed ciphertexts, then pushed through both an independently written
 AMSCO projection and the unchanged PHP class, and all 64 reproduce the paper.
 The selected candidate matches every printed five-character token, differing
 only in line-wrap whitespace.
-
-## Re-run the search
-
-```sh
-python3 -B search/zero_full/targeted_reproduce.py
-```
-
-This runs a native CFB8 constraint solver against the observed paper and the
-masked AMSCO layout, linked against a locally built libmcrypt 2.5.8, with no
-plaintext crib. It returns exactly 64 completions, all of them
-`blowfish-compat` with the IV fill above. Picking candidate 18 happens after
-enumeration and is a reading judgment, not a solver output.
-
-Build instructions are in `lib/BUILD.md`. `search/README.md` explains the method
-and states exactly how much of the key space was covered, which is less than all
-of it.
-
-## Hashes
-
-| Thing | SHA-256 |
-|---|---|
-| Selected plaintext, 630 bytes | `35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280` |
-| Original compact uppercase ciphertext | `5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c` |
