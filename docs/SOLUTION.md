@@ -87,3 +87,12 @@ reconstructed ciphertexts, then pushed through both an independently written
 AMSCO projection and the unchanged PHP class, and all 64 reproduce the paper.
 The selected candidate matches every printed five-character token, differing
 only in line-wrap whitespace.
+
+## More
+
+**The key search did not cover the whole key space.** 378,200 of the 3,265,920
+possible keys are guaranteed swept, and no uniqueness claim is made. The method,
+the exact coverage, and how to re-run the search are in
+[`search/README.md`](../search/README.md), with build steps in
+[`lib/BUILD.md`](../lib/BUILD.md). One character of the transcription is
+contested; the evidence is in [`TRANSCRIPTION_NOTE.md`](TRANSCRIPTION_NOTE.md).
