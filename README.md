@@ -75,5 +75,5 @@ notes identified CrypTool and AMSCO as leads, documented failed AMSCO searches
 through nine-digit keys, and raised missing ciphertext as a possible
 explanation — the thread this solve pulled on.
 
-**AI Disclaimer.** Research and discovery was aided in part by GPT-6 Astra Ultra.
+**AI Disclosure.** Research and discovery was aided in part by GPT-6 Astra Ultra.
 
