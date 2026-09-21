@@ -63,7 +63,7 @@ for good. What made them reconstructable is the underlying cipher, wherein each 
 depends only on the handful before it, so damage stays local and readable text
 re-synchronizes around the gaps. A search rebuilt them from context, pinning 596
 of the 630 bytes to a single possible value. Four small spots admit more than
-one reading; one version is coherent English and the rest are gibberish, so the
+one reading. One version is coherent English and the rest are gibberish, so the
 message itself is not in doubt, but this is more so a reconstruction, rather than a decryption.
 
 A more technical explanation lives in [`docs/SOLUTION.md`](docs/SOLUTION.md).
