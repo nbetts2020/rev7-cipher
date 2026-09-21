@@ -21,10 +21,12 @@ This repo contains the transcription, the recovered plaintext, and everything ne
 ## Solve
 
 **Biggest Finding: the cipher was almost unsolvable because...it was broken.** In 2016, Treyarch wrote the
-message, encrypted it, and got 1,260 characters. They ran that through a free
-online scrambling tool to shuffle it. The tool handed back 1,092 characters — it
-had silently deleted 168 of them and reported no error. That output is what went
-into the game.
+message, encrypted it, and got 1,260 characters. To shuffle those, they ran them
+through an **AMSCO** transposition tool built on code from **CrypTool-Online** —
+the free browser edition of CrypTool, a long-running open-source cryptography
+education project, which back then lived at `cryptool-online.org`. The tool
+handed back 1,092 characters. It had silently deleted 168 of them and reported
+no error. That output is what went into the game.
 
 So 13% of the ciphertext isn't on the paper, and never was. **It was not
 solvable as designed.** No amount of cleverness would decrypt it, because part
@@ -38,11 +40,12 @@ shuffle that unscrambles them. That search cannot succeed — the real message w
 outside the space being searched.
 
 **How it came apart.** Rather than guess at the cipher, this work went and
-fetched the actual source code of the 2016 tool, pinned to the version that was
-live when the game shipped, and read it. The bug is right there in the file: the
-tool labels its columns with the digits of your key, then prints out columns `1`
-through `N`. If your key contains a `0`, that column gets built, gets filled,
-and never gets printed. Everything in it is discarded.
+fetched CrypTool-Online's actual source — the file `class.amsco.php`, pinned to
+the version that was live when the game shipped — and read it. The bug is right
+there: the tool labels its columns with the digits of your key, then prints out
+columns `1` through `N`. If your key contains a `0`, that column gets built,
+gets filled, and never gets printed. Everything in it is discarded. (CrypTool
+removed the file in 2020; the modern site has no AMSCO tool.)
 
 That turns the missing characters from a mystery into arithmetic:
 
