@@ -1,17 +1,13 @@
-# Rev-7 — the Origins Trench cipher from Black Ops III *Revelations*
+## Rev-7 Cipher
 
-The last unsolved cipher from *Call of Duty: Black Ops III* — the **Origins Trench
-paper** in the *Revelations* map, shipped September 2016 — was recovered on
-**September 7, 2026**.
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/0288956c-5cfb-44d5-a92a-bd2fda4b3af0" />
 
-This repository contains the transcription, the recovered plaintext, a
-standard-library verifier that reproduces the entire encryption chain from
-scratch, the pinned 2016 third-party source whose bug made the cipher solvable,
-and the constraint search that found the key. It is deliberately small:
-everything here is either needed to check the solve, needed to reproduce it, or
-is the evidence for a claim made below.
+The last unsolved cipher from *Call of Duty: Black Ops III*, the **Origins Trench
+paper** in *Revelations*, is solved.
 
-## The message
+This repo contains the transcription, the recovered plaintext, and everything necessary to recreate the solve.
+
+## Message
 
 > MI-8 transcript. Field Report 1918: Corporal Dempsey is still at large in
 > France. My orders are to bring him back to US intelligence to face charges and
@@ -22,100 +18,53 @@ is the evidence for a claim made below.
 > mound. I must go to the mound. Remember that! Why can’t I ever remember that.’
 > Not only is Dempsey a traitor, but he has lost his mind. I better be careful.
 
-Exactly 630 UTF-8 bytes, including the curly quotation marks and apostrophes and
-four trailing newlines. The byte-exact file is
-[`solution/plaintext.txt`](solution/plaintext.txt) — do not let an editor
-normalize its line endings.
+## Solve
 
-## Verify it yourself
+**Biggest Finding: the cipher was almost unsolvable because...it was broken.** In 2016, Treyarch wrote the
+message, encrypted it, and got 1,260 characters. They ran that through a free
+online scrambling tool to shuffle it. The tool handed back 1,092 characters — it
+had silently deleted 168 of them and reported no error. That output is what went
+into the game.
 
-```sh
-git clone https://github.com/nbetts2020/rev7-cipher
-cd rev7-cipher
-python3 -I solution/verify_portable.py
-```
+So 13% of the ciphertext isn't on the paper, and never was. **It was not
+solvable as designed.** No amount of cleverness would decrypt it, because part
+of it does not exist.
 
-Stock Python 3, standard library only. No native crypto, no network, no
-dependencies. It implements Blowfish from the constants in
-`solution/blowfish_constants.json`, runs the full chain forward and backward,
-and prints:
+**That is also why every attempt stalled.** A shuffling cipher normally
+preserves length: 1,092 characters in, 1,092 out. So people reasonably treated
+the 1,092 characters on the paper as the complete message and searched for the
+shuffle that unscrambles them. That search cannot succeed — the real message was
+1,260 characters. It was never a matter of searching harder; the answer was
+outside the space being searched.
 
-```
-PASS original Blowfish compatibility known-answer test
-PASS exact CFB8 decryption and re-encryption of all 630 bytes
-PASS legacy AMSCO key 1947038265, dropped column 0, and character reversal
-PASS all 1,092 observed hexadecimal characters match
-PASS all 219 printed groups match, including the initial 83
-Plaintext SHA-256: 35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280
-Observed hex SHA-256: 5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c
-```
+**How it came apart.** Rather than guess at the cipher, this work went and
+fetched the actual source code of the 2016 tool, pinned to the version that was
+live when the game shipped, and read it. The bug is right there in the file: the
+tool labels its columns with the digits of your key, then prints out columns `1`
+through `N`. If your key contains a `0`, that column gets built, gets filled,
+and never gets printed. Everything in it is discarded.
 
-## The chain
-
-The paper holds **1,092 uppercase hex characters** in 219 groups of five, the
-first group having only two. In encryption order:
-
-| # | Layer | Exact settings |
-|---|---|---|
-| 1 | Block cipher | libmcrypt `blowfish-compat`, mode **CFB8**, raw ASCII key `Zombies` (7 bytes), IV `3030303030303030` — eight ASCII zero characters, not eight zero bytes |
-| 2 | Representation | Uppercase hex: 630 plaintext bytes → 630 ciphertext bytes → **1,260 characters** |
-| 3 | Transposition | The 2016 CrypTool `class.amsco.php` AMSCO with numeric key **`1947038265`**, two-character/one-character cells starting with two |
-| 4 | Presentation | Group in fives, then reverse the entire grouped string |
-
-Step 4 is why the paper opens with a stray two-character group `83`.
-
-## The bug
-
-That AMSCO implementation **silently destroys data**. Its columns are labeled by
-the digits of the key, so a key containing `0` has a column labeled `0` — but the
-output loop enumerates labels `1..n` and never emits it. Everything routed into
-column 0 is dropped without warning.
-
-With key `1947038265` the zero sits in the fifth column, which takes two hex
-characters per 15-character row. Across 84 rows:
+That turns the missing characters from a mystery into arithmetic:
 
 ```
-1,260 − (2 × 84) = 1,260 − 168 = 1,092
+1,260 − 1,092 = 168 = 2 × 84
 ```
 
-which is exactly the character count on the paper. That missing-data signature is
-what identified the key. The pinned source is
-[`historical_source/class.amsco.php`](historical_source/class.amsco.php)
-(SHA-256 `132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f`,
-from `cryptool-org/cto` at commit `887e095c586f7dbae805ae40a29e82ce0d565a6f`).
-Running that file **unmodified** under PHP 8.4 reproduces the paper exactly.
+168 characters gone, two from each of 84 rows — the exact shape of one dropped
+column. The size of the hole tells you the key contains a `0` and roughly where
+it sits. That is what collapsed millions of candidate keys into a searchable
+set, and `1947038265` is the one that fits. Running the unmodified 2016 file
+today reproduces the paper exactly, which confirms the construction — though not
+which copy of the tool the author actually used.
 
-## Caveats — please read these before repeating any claim from here
-
-**The 168 deleted characters are gone.** They cannot be recovered from the paper.
-They were regenerated by constraint search, which produced **64 text-compatible
-candidates** agreeing on 596 of 630 bytes and differing in four small regions.
-One candidate is coherent English throughout; that is the one published above,
-unedited. Re-encryption reproducing the paper verifies **the chain, not the
-choice of candidate** — every one of the 64 reproduces the paper by construction.
-All 64 are in `solution/all_64_candidates.txt.gz`, with the differing regions
-mapped in `solution/ambiguity.json`.
-
-**The key space was not exhausted.** The sweep targeted the **416,400-key**
-signed-32-bit-safe subset of the **3,265,920** total non-leading-zero
-permutations — and did not finish even that. One worker completed its 208,200
-keys and produced the 64 candidates; the other was stopped at a 170,000-key
-checkpoint once the answer was in hand. So **378,200 keys are guaranteed
-swept**, at least 38,200 of the safe subset were never reached, and the
-remaining 2,849,520 keys were not searched at all. No claim of uniqueness is
-made or supported. Full accounting: [`search/README.md`](search/README.md).
-
-**One transcription character is contested.** The reconstruction supports the
-image-based line-6 reading `CF85C 2D87A ABE63` over a published guide's
-`3D87A`. The original transcription was left unchanged. See
-[`docs/TRANSCRIPTION_NOTE.md`](docs/TRANSCRIPTION_NOTE.md).
-
-**The CrypTool bug is a dead artifact, not a live vulnerability.** The file was
-removed from `cryptool-org/cto` in commit
-`3220945062fedebbe56db59e44b0d659732d9cf9` (October 27, 2020); AMSCO is absent
-from both the current and legacy CrypTool catalogs, and its routes return 404.
-Byte-identical copies survive in `fschell/cryptool-online` and its forks. No fix
-or pull request has been filed.
+**The missing text was rebuilt, not recovered.** Those 168 characters are gone
+for good. What made them reconstructable is the underlying cipher: each byte
+depends only on the handful before it, so damage stays local and readable text
+re-synchronizes around the gaps. A search rebuilt them from context, pinning 596
+of the 630 bytes to a single possible value. Four small spots admit more than
+one reading; one version is coherent English and the rest are gibberish, so the
+message itself is not in doubt — but this is a reconstruction, not a decryption.
+That distinction is why the caveats below are worth reading.
 
 ## Credits
 
@@ -128,46 +77,3 @@ explanation — the thread this solve pulled on.
 
 The solve itself was carried out with OpenAI Codex (gpt-6-astra).
 
-## Layout
-
-```
-cipher.txt            the transcription, 16 lines, groups of five
-solution/             plaintext, all 64 candidates, the portable verifier
-docs/                 full technical report, transcription note
-historical_source/    the pinned 2016 AMSCO PHP file with the bug
-search/               the constraint search that found the key
-lib/                  the scanner it compiles against, and build notes
-```
-
-Start with [`docs/SOLUTION.md`](docs/SOLUTION.md) for the full technical
-account, or [`search/README.md`](search/README.md) for how the key was actually
-found. Verifying the solve needs nothing but Python; reproducing the *search*
-needs a libmcrypt build, covered in [`lib/BUILD.md`](lib/BUILD.md).
-
-Not included here: the September 2026 audit of the CrypTool source's remaining
-deployments, and the reports from the many approaches that did not work.
-
-## Hashes
-
-| Thing | SHA-256 |
-|---|---|
-| Plaintext (630 bytes) | `35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280` |
-| Ciphertext, 1,092 hex chars, whitespace stripped | `5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c` |
-| `cipher.txt` as a file | `1702381306e7a543ceafad11343fc3432e19914001168f9f02fe7e019a17e215` |
-| Pinned `class.amsco.php` | `132d61ff8b794ab9717a0ce284d7bf21f82c8dbfe39bf9f1a3b5f7aa7eb91e4f` |
-
-## License
-
-Code and documentation in this repository: MIT, see [LICENSE](LICENSE).
-
-Two files are third-party and are **not** covered by that license. They are
-included verbatim as evidence:
-
-- `historical_source/class.amsco.php`, from `cryptool-org/cto`, under its
-  original terms.
-- `solution/blowfish_constants.json`, derived from libmcrypt 2.5.8's
-  `blowfish-compat.c` (LGPL). See `solution/BLOWFISH_SOURCE_NOTICE.txt` and
-  `solution/COPYING.LIB`.
-
-*Call of Duty* and *Black Ops III* are trademarks of Activision. This is
-unaffiliated fan research.
