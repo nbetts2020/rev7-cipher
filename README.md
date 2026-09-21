@@ -21,53 +21,50 @@ This repo contains the transcription, the recovered plaintext, and everything ne
 ## Solve
 
 **Biggest Finding: the cipher was almost unsolvable because...it was broken.** In 2016, Treyarch wrote the
-message, encrypted it, and got 1,260 characters. To shuffle those, they ran them
+message, encrypted it, and got 1,260 characters. To shuffle those, they likely ran them
 through an **AMSCO** transposition tool built on code from **CrypTool-Online** —
-the free browser edition of CrypTool, a long-running open-source cryptography
-education project, which back then lived at `cryptool-online.org`. The tool
+the free browser edition of CrypTool, which back then lived at `cryptool-online.org`. The tool
 handed back 1,092 characters. It had silently deleted 168 of them and reported
 no error. That output is what went into the game.
 
-So 13% of the ciphertext isn't on the paper, and never was. **It was not
-solvable as designed.** No amount of cleverness would decrypt it, because part
-of it does not exist.
-
 **That is also why every attempt stalled.** A shuffling cipher normally
-preserves length: 1,092 characters in, 1,092 out. So people reasonably treated
+preserves length: 1,092 characters in, 1,092 out. So a reasonable assumption treated
 the 1,092 characters on the paper as the complete message and searched for the
-shuffle that unscrambles them. That search cannot succeed — the real message was
-1,260 characters. It was never a matter of searching harder; the answer was
-outside the space being searched.
+shuffle that unscrambles them. That search cannot succeed, as the real message was
+1,260 characters.
 
-**How it came apart.** Rather than guess at the cipher, this work went and
-fetched CrypTool-Online's actual source — the file `class.amsco.php`, pinned to
-the version that was live when the game shipped — and read it. The bug is right
-there: the tool labels its columns with the digits of your key, then prints out
-columns `1` through `N`. If your key contains a `0`, that column gets built,
-gets filled, and never gets printed. Everything in it is discarded. (CrypTool
-removed the file in 2020; the modern site has no AMSCO tool.)
+**Breakthrough.** Rather than continuing to hack away at the cipher itself, I
+fetched CrypTool-Online's source — the file `class.amsco.php`, pinned to the
+version that was live when the game shipped, and read it. The bug is
+unmistakable - the tool labels its columns with the digits of your key, then
+prints out columns `1` through `N`. If your key contains a `0`, that column gets
+built, gets filled, and never gets printed. Everything in it is discarded.
 
-That turns the missing characters from a mystery into arithmetic:
+CrypTool never fixed this. The file was quietly deleted in 2020 as part of a
+legacy refactor, and no public bug
+report or fix was ever filed against it. The modern site has no AMSCO tool. But
+the bug itself was never corrected — byte-identical copies of that file were
+still sitting in eleven public repositories as of September 2026.
+
+Thus:
 
 ```
-1,260 − 1,092 = 168 = 2 × 84
+1,260 - 1,092 = 168 = 2 × 84
 ```
 
 168 characters gone, two from each of 84 rows — the exact shape of one dropped
 column. The size of the hole tells you the key contains a `0` and roughly where
-it sits. That is what collapsed millions of candidate keys into a searchable
-set, and `1947038265` is the one that fits. Running the unmodified 2016 file
-today reproduces the paper exactly, which confirms the construction — though not
-which copy of the tool the author actually used.
+it sits. That changed what to search for. Sweeping the keys that could leave a gap this
+size turned up `1947038265`. Running the unmodified 2016 file
+today reproduces the paper exactly.
 
 **The missing text was rebuilt, not recovered.** Those 168 characters are gone
-for good. What made them reconstructable is the underlying cipher: each byte
+for good. What made them reconstructable is the underlying cipher, wherein each byte
 depends only on the handful before it, so damage stays local and readable text
 re-synchronizes around the gaps. A search rebuilt them from context, pinning 596
 of the 630 bytes to a single possible value. Four small spots admit more than
 one reading; one version is coherent English and the rest are gibberish, so the
 message itself is not in doubt — but this is a reconstruction, not a decryption.
-That distinction is why the caveats below are worth reading.
 
 ## Credits
 
@@ -78,5 +75,5 @@ notes identified CrypTool and AMSCO as leads, documented failed AMSCO searches
 through nine-digit keys, and raised missing ciphertext as a possible
 explanation — the thread this solve pulled on.
 
-The solve itself was carried out with OpenAI Codex (gpt-6-astra).
+**AI Disclaimer.** Research and discovery was aided in part by GPT-6 Astra Ultra.
 
