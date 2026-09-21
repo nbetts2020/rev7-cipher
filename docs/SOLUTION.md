@@ -1,50 +1,111 @@
 # Rev-7
 
-**The message is recovered.** The coherent completion reproduces every one of the paper's 1,092 hexadecimal characters and all 219 printed groups. The original ciphertext transcription was not changed.
+**The message is recovered.** The reconstruction reproduces every one of the
+paper's 1,092 hexadecimal characters and all 219 printed groups. I did not
+change the original transcription.
 
-> MI-8 transcript. Field Report 1918: Corporal Dempsey is still at large in France. My orders are to bring him back to US intelligence to face charges and find out who he is working for. I almost had him in Calais, but my cover was blown and he evaded capture. He retreated deep behind enemy lines somewhere in northern France. He did leave behind some cryptic intel though. A handwritten note. It reads: ‘I am not a monster. He is the monster. The secret is in the mound. I must go to the mound. Remember that! Why can’t I ever remember that.’ Not only is Dempsey a traitor, but he has lost his mind. I better be careful.
+> MI-8 transcript. Field Report 1918: Corporal Dempsey is still at large in
+> France. My orders are to bring him back to US intelligence to face charges and
+> find out who he is working for. I almost had him in Calais, but my cover was
+> blown and he evaded capture. He retreated deep behind enemy lines somewhere in
+> northern France. He did leave behind some cryptic intel though. A handwritten
+> note. It reads: ‘I am not a monster. He is the monster. The secret is in the
+> mound. I must go to the mound. Remember that! Why can’t I ever remember that.’
+> Not only is Dempsey a traitor, but he has lost his mind. I better be careful.
 
-The exact file contains **630 UTF-8 bytes**, including the curly quotation marks/apostrophe and **four LF bytes after the final period**. Those bytes are preserved in `solution/plaintext.txt`.
+That file is exactly **630 UTF-8 bytes**, including the curly quotes and
+apostrophes and **four line feeds after the final period**. The bytes are in
+`solution/plaintext.txt`. Don't let an editor normalize them.
 
-| Layer, in encryption order | Exact settings |
-|---|---|
-| Modern encryption | libmcrypt `blowfish-compat`, CFB8; raw ASCII key `Zombies` (7 bytes / 56 bits); IV `3030303030303030` (eight ASCII zero characters) |
-| Representation | Uppercase hexadecimal: 630 encrypted bytes become 1,260 characters |
-| Historical AMSCO | Numeric key `1947038265`; continuous two-character/one-character cells, starting with two; reproduce the historical omission of the column labeled `0` |
-| Final operation | Group in fives, then reverse the entire grouped string; the paper adds its visual line wrapping |
+## The chain
 
-The essential discovery was **data loss in the historical AMSCO implementation**. The zero is in the fifth column. That column holds two hexadecimal characters per 15-character row. Across 84 rows, it drops 168 characters: **1,260 − 168 = 1,092**. Reversing the grouped result also explains the leading two-character group `83`.
+| # | Layer, in encryption order | Exact settings |
+|---|---|---|
+| 1 | Block cipher | libmcrypt `blowfish-compat`, CFB8. Raw ASCII key `Zombies`, 7 bytes / 56 bits. IV `3030303030303030`, which is eight ASCII zero characters, not eight zero bytes |
+| 2 | Representation | Uppercase hexadecimal. 630 encrypted bytes become 1,260 characters |
+| 3 | Historical AMSCO | Numeric key `1947038265`. Continuous two-character / one-character cells, starting with two. Reproduce the omission of the column labeled `0` |
+| 4 | Presentation | Group in fives, then reverse the whole grouped string. The paper adds its own line wrapping |
 
-This behavior is present in the authenticated pre-release [CrypTool AMSCO source](https://github.com/cryptool-org/cto/blob/887e095c586f7dbae805ae40a29e82ce0d565a6f/_ctoLegacy/tools/amsco/class.amsco.php). Its output loop reads labels 1 through the key length, so it never emits label 0. The numeric key fits a signed 32-bit integer. Executing the unchanged historical class in PHP 8.4.25 reproduced the paper exactly. This verifies a matching construction; it does not establish which software deployment the original author used.
+## The bug
 
-**How the recovery was obtained.** Reversing the paper and inverting the surviving AMSCO columns gives a 1,260-character pattern with 168 unknown nibbles. A CFB8 constraint search reconstructs those nibbles while requiring ASCII text or a specified small repertoire of well-formed UTF-8 typography. The broad zero-key search found the key above. A fresh, targeted run with that key, algorithm and IV, **without supplying a plaintext crib**, reproduced all 64 compatible completions.
+**The zero in the key sits in the fifth column.** That column holds two
+hexadecimal characters per 15-character row. Across 84 rows it drops 168:
 
-**The ambiguity is explicit.** Because a column is erased, the original bytes are not mathematically unique. Under the tested text repertoire, there are 64 complete candidates: 596 of 630 bytes are identical, while four spans admit 2 × 2 × 2 × 8 alternatives. Candidate 18 (zero-based) is the coherent reading throughout: `psey is s`, `cover was `, `s: ‘I am`, and a final period plus four newlines. The other choices contain nonsensical character sequences. The quoted message is that candidate **without corrections or inserted words**. All alternatives are retained in `solution/all_64_candidates.txt.gz` and explained in `solution/ambiguity.json`.
+```
+1,260 - 168 = 1,092
+```
 
-**Verification.** Three independent reviews checked the plaintext and ciphertext. All 64 candidates re-encrypt with libmcrypt to their corresponding reconstructed ciphertext and then reproduce the original paper through both independently written AMSCO projections and the unchanged PHP class. The selected candidate also matches every printed five-character token, allowing only line-wrap whitespace differences.
+which is the count on the paper. Reversing the grouped output is also what
+leaves the stray two-character group `83` at the front.
 
-Run the portable forward/decryption verifier from this project:
+You can read the defect yourself in the [pinned 2016 source](https://github.com/cryptool-org/cto/blob/887e095c586f7dbae805ae40a29e82ce0d565a6f/_ctoLegacy/tools/amsco/class.amsco.php).
+Its output loop reads labels 1 through the key length, so it never emits label
+`0`. The key also fits inside a signed 32-bit integer, which matters because the
+PHP wrapper casts it. Running that unchanged class under PHP 8.4.25 reproduces
+the paper exactly.
+
+That proves the construction matches. It does not prove which copy of the
+software the author actually used.
+
+## How the missing characters came back
+
+**Reverse the paper, invert the surviving AMSCO columns, and you get a
+1,260-character pattern with 168 unknown nibbles.** A CFB8 constraint search
+fills those in, allowing only ASCII text or a small specified repertoire of
+well-formed UTF-8 typography. The broad key sweep found the key above. A fresh,
+targeted run with that key, algorithm and IV, **with no plaintext crib supplied
+to the search**, returned all 64 compatible completions.
+
+## What is ambiguous
+
+**Because a column is erased, the original bytes are not mathematically
+unique.** Under the tested text repertoire there are 64 complete candidates.
+596 of the 630 bytes are identical across all of them. Four spans differ,
+admitting 2 × 2 × 2 × 8 alternatives between them.
+
+Candidate 18, counting from zero, is the coherent reading in all four:
+`psey is s`, `cover was `, `s: ‘I am`, and a final period followed by four
+newlines. The others give nonsense. The message quoted above is that candidate
+with **nothing corrected and no words inserted**.
+
+Every alternative is kept in `solution/all_64_candidates.txt.gz`, and
+`solution/ambiguity.json` maps the regions that differ.
+
+## Check it yourself
 
 ```sh
 python3 -I solution/verify_portable.py
 ```
 
-It uses Python's standard library and the small files in `solution/`; it requires no native crypto library or network. It verifies the recovered ciphertext and plaintext, both encryption layers, the omitted column, original compact ciphertext, and grouping.
+Stock Python 3, standard library only. No native crypto library, no network, no
+dependencies. It checks the recovered ciphertext and plaintext, both encryption
+layers, the omitted column, the original compact ciphertext and the grouping.
 
-To repeat the missing-nibble search itself:
+All 64 candidates were also re-encrypted with libmcrypt back to their
+reconstructed ciphertexts, then pushed through both an independently written
+AMSCO projection and the unchanged PHP class, and all 64 reproduce the paper.
+The selected candidate matches every printed five-character token, differing
+only in line-wrap whitespace.
+
+## Re-run the search
 
 ```sh
 python3 -B search/zero_full/targeted_reproduce.py
 ```
 
-This runs a native CFB8 constraint solver, linked against a locally built libmcrypt 2.5.8, against the observed paper and the masked AMSCO layout, with no plaintext crib supplied. It returns exactly 64 completions, all of them `blowfish-compat` with the IV fill above. The post-search selection of candidate 18 is a reading judgment, recorded explicitly as such. Build instructions are in `lib/BUILD.md`, and `search/README.md` explains the method and states exactly how much of the key space was covered.
+This runs a native CFB8 constraint solver against the observed paper and the
+masked AMSCO layout, linked against a locally built libmcrypt 2.5.8, with no
+plaintext crib. It returns exactly 64 completions, all of them
+`blowfish-compat` with the IV fill above. Picking candidate 18 happens after
+enumeration and is a reading judgment, not a solver output.
 
-Exact selected plaintext SHA-256:
+Build instructions are in `lib/BUILD.md`. `search/README.md` explains the method
+and states exactly how much of the key space was covered, which is less than all
+of it.
 
-`35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280`
+## Hashes
 
-Original compact uppercase ciphertext SHA-256:
-
-`5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c`
-
-The earlier negative search reports are historical records superseded by this recovery.
+| Thing | SHA-256 |
+|---|---|
+| Selected plaintext, 630 bytes | `35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280` |
+| Original compact uppercase ciphertext | `5c50001013a2dd862e13c38d314a0ba6d7303794287a05cc999018cf82cf4b1c` |
