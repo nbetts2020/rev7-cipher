@@ -25,18 +25,12 @@
   "files": {
     "BLOWFISH_SOURCE_NOTICE.txt": "e2e581112a5cb8e3f74681fbb115881182551be61f30f55556936d0dfdb9095b",
     "COPYING.LIB": "ca0061fc1381a3ab242310e4b3f56389f28e3d460eb2fd822ed7a21c6f030532",
-    "SOLUTION.md": "02cfff34998a1e59ecfaeedf287aa11b17cc1fdeede64edcd46f68c9bcb10722",
     "all_64_candidates.txt.gz": "1258aa3a3d8b7efe8dcc39ee77e0af3e348edbe41927364bde88451329ea5611",
     "ambiguity.json": "854253ce42521c3006148d02ab1e3fcd073fbfdab63be4b0bf296690ba6dcece",
     "blowfish_constants.json": "f1749fcedddcd51241a79a71095398274b38ddd03c66377aaff229453fb179e4",
-    "independent_audit.json": "8fa050d821029464224296fe4e5eefc33de88c425ef4dcb21f329fbd31dcc729",
-    "layout_and_key.json": "061cb45d565ae859b1f3cb5e931f88d0cebf16ad4f36bc541b8c677459c21cdf",
     "observed_cipher.txt": "1702381306e7a543ceafad11343fc3432e19914001168f9f02fe7e019a17e215",
-    "original_php_results.json": "3174b51566560c87a7bccda078855228ab77031d9c6f04d93eb8f7ef89fbb943",
     "plaintext.txt": "35e58315c1edbfeb73a244c0a8075dc8e07709a2c554736726e45ce756c9d280",
-    "portable_validation.json": "2e40c603c879a07178a4163fa4a9d58735938487ba486cbc450799e652484354",
     "recovered_cipher.hex": "ecdfd1ca0998ba7f26e1ff3f956869de21124053880594f3b8471b4099c4e348",
-    "recovery_results.json": "e1eddf5713ff42cfee48c10472eb937c4a1f488abf61ed4c472b1dbcd6570058",
     "verify_portable.py": "65b1d71075585bedd73289f1565f4d929323f12d6db8741907658b7519945845"
   }
 }

@@ -83,4 +83,4 @@ not a solver output. See the caveats in the top-level README.
 |---|---|
 | `search.cpp` | Shared scanner: algorithm registry, CFB8/ECB/CBC probes, printable-text gate. Included directly by `recover.cpp`. |
 | `zero_projection.py` | Forward/inverse AMSCO projection for non-leading-zero 10-digit keys, including the dropped column. `python3 -I lib/zero_projection.py` runs its 200-case self-test against `literal_models.py`. |
-| `literal_models.py` | Literal Python translation of the 2016 PHP AMSCO class, used only to check the projection. The authoritative check is the unmodified PHP itself, under `historical_source/php_runtime/`. |
+| `literal_models.py` | Literal Python translation of the 2016 PHP AMSCO class, used only to check the projection. The authoritative source is the unmodified PHP itself, `historical_source/class.amsco.php`; the runner that executed it is not included in this repository. |
